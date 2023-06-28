@@ -19,7 +19,6 @@ picked_number = random.randint(1, 100)
 game_on = True
 EASY_LEVEL = 10
 HARD_LEVEL = 5
-# turns = 0
 
 
 while game_on:
