@@ -12,26 +12,14 @@
 
 from art import guess_number_logo
 import random
-# from
+import os
 
 
 picked_number = random.randint(1, 100)
 game_on = True
-
-# def guess(num):
-#     if num == picked_number:
-#         print("You guessed the right number: {picked_number}. You win!")
-#     elif num > picked_number:
-#         print("Too high. \nGuess again.")
-#     elif num < picked_number:
-#         print("Too low. \nGuess again.")
-
-
-def display():
-    print(f"You have {attempts} attempts remaining to guess the number.")
-    global guessed_number
-    guessed_number = int(input("Make a guess: "))
-
+EASY_LEVEL = 10
+HARD_LEVEL = 5
+# turns = 0
 
 
 while game_on:
@@ -42,22 +30,26 @@ while game_on:
         print("Please choose the right input.")
         game_on = False
     elif user_input == "easy":
-        attempts = 10
+        turns = EASY_LEVEL
     elif user_input == "hard":
-        attempts = 5
-    for i in range(attempts):
-        display()
+        turns = HARD_LEVEL
+
+    for i in range(turns):
+        print(f"You have {turns-i} attempts remaining to guess the number.")
+        guessed_number = int(input("Make a guess: "))
         if guessed_number == picked_number:
             print(f"You guessed the right number: {picked_number}. You win!")
             game_on = False
+            break
         elif guessed_number > picked_number:
-            print("Too high. \nGuess again.")
+            print("Too high.")
         elif guessed_number < picked_number:
-            print("Too low. \nGuess again.")
-        attempts -= 1
-    print("You've run out of guesses, you lose. \n")
-    user_input2 = input("This repl has existed, run again?")
+            print("Too low.")
+        if i == (turns-1):
+            print("You've run out of guesses, you lose. \n")
+    user_input2 = input("This repl has existed, run again? ")
     if user_input2 == "yes":
+        os.system("clear")
         game_on = True
     else:
         game_on = False
